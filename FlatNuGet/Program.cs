@@ -94,7 +94,7 @@ namespace FlatNuGet
                 PrintVersion();
             }
             if (_args.MainParameter == null) return;
-            OperationRouter.actions += ConsoleOperationReciever.Receive;
+            OperationRouter.actions += ConsoleOperationReceiver.Receive;
             FlatNGCore flatNGCore = new FlatNGCore(new FileInfo(_args.MainParameter));
             if (_args.Options.ContainsKey(Operation))
             {
@@ -143,12 +143,28 @@ namespace FlatNuGet
                                     flatNGCore.Filter(description);
                                 }
                                 break;
+                            case "unfilter":
+                            case "uf":
+                                {
+                                    i++;
+                                    var description = _args.Options[Operation][i];
+                                    flatNGCore.Unfilter(description);
+                                }
+                                break;
                             case "track":
                             case "t":
                                 {
                                     i++;
                                     var description = _args.Options[Operation][i];
                                     flatNGCore.Track(description);
+                                }
+                                break;
+                            case "untrack":
+                            case "ut":
+                                {
+                                    i++;
+                                    var description = _args.Options[Operation][i];
+                                    flatNGCore.Untrack(description);
                                 }
                                 break;
                             default:
@@ -161,7 +177,7 @@ namespace FlatNuGet
                 }
             }
             ///
-            while (ConsoleOperationReciever.OperationCount > 0)
+            while (ConsoleOperationReceiver.OperationCount > 0)
             {
                 //Wait for all console output.
             }

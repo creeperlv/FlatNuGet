@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace FlatNuGet
 {
-    public class ConsoleOperationReciever
+    public class ConsoleOperationReceiver
     {
         internal static int OperationCount = 0;
         static void PrintPkgRef(PackageReference pkg)
@@ -14,7 +14,7 @@ namespace FlatNuGet
             Console.Write($"{pkg.Version}");
             Console.ResetColor();
         }
-        static object _Lock=new object();
+        static object _Lock = new object();
         public static void Receive(Operation operation)
         {
             lock (_Lock)
@@ -23,6 +23,7 @@ namespace FlatNuGet
                 switch (operation.OperationType)
                 {
                     case OperationType.Common:
+                        Console.WriteLine($"{operation.Message}");
                         break;
                     case OperationType.Download:
                         {
@@ -92,10 +93,34 @@ namespace FlatNuGet
                         }
                         break;
                     case OperationType.Error:
+                        {
+                            Console.Write("[");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Error");
+                            Console.ResetColor();
+                            Console.Write("]");
+                            {
+                                Console.WriteLine($"{operation.Message}");
+                            }
+                        }
                         break;
                     case OperationType.Warning:
+                        {
+                            Console.Write("[");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write("Warn");
+                            Console.ResetColor();
+                            Console.Write("]");
+                            {
+                                Console.WriteLine($"{operation.Message}");
+                            }
+                        }
                         break;
                     default:
+                        {
+                            Console.WriteLine($"{operation.Message}");
+
+                        }
                         break;
                 }
                 Console.ResetColor();

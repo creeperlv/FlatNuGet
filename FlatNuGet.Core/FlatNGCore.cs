@@ -153,10 +153,24 @@ namespace FlatNuGet.Core
             if (File.Exists(IndexFile.FullName)) File.Delete(IndexFile.FullName);
             File.WriteAllText(IndexFile.FullName, PackageSerialization.Serialize(_packages));
         }
+        public void Untrack(string Extension)
+        {
+            if (!_packages.TrackingExtensions.Contains(Extension)) return;
+            _packages.TrackingExtensions.Remove(Extension);
+            if (File.Exists(IndexFile.FullName)) File.Delete(IndexFile.FullName);
+            File.WriteAllText(IndexFile.FullName, PackageSerialization.Serialize(_packages));
+        }
         public void Filter(string filter)
         {
             if (_packages.Filters.Contains(filter)) return;
             _packages.Filters.Add(filter);
+            if (File.Exists(IndexFile.FullName)) File.Delete(IndexFile.FullName);
+            File.WriteAllText(IndexFile.FullName, PackageSerialization.Serialize(_packages));
+        }
+        public void Unfilter(string filter)
+        {
+            if (!_packages.Filters.Contains(filter)) return;
+            _packages.Filters.Remove(filter);
             if (File.Exists(IndexFile.FullName)) File.Delete(IndexFile.FullName);
             File.WriteAllText(IndexFile.FullName, PackageSerialization.Serialize(_packages));
         }

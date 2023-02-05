@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlatNuGet.Core", "FlatNuGet
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{03A7F223-EF36-40AD-B4FA-8629264ECAEB}"
 	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+		build.sh = build.sh
 		README.md = README.md
 	EndProjectSection
 EndProject
