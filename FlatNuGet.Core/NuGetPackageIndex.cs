@@ -12,7 +12,8 @@ namespace FlatNuGet.Core
         public List<string> Filters = new List<string> { };
         public string TargetDirectory = "./Assets/Plug-in";
         public List<PackageReference> ItemGroup = new List<PackageReference>();
-    }
+        public NuGetPackageIndex() { }
+	}
     [Serializable]
     public class PackageReference
     {
